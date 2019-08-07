@@ -1,0 +1,40 @@
+
+##第一题
+create database practice;
+
+use practice;
+
+create table if not exists email(
+        Id int not null primary key,
+        Email varchar(255);
+);
+
+insert into email(ID,Email) values(1,'a@b.com'),(2,'c@d.com'),(3,'a@b.com');
+
+SELECT * FROM email WHERE Email IN （SELECT Email FROM email GROUP BY Email HAVING COUNT(Email)>1)
+
+
+
+##第二题
+CREATE TABLE World (
+name VARCHAR(50) NOT NULL,
+continent VARCHAR(50) NOT NULL,
+area INT NOT NULL,
+population INT NOT NULL,
+gdp INT NOT NULL
+);
+
+INSERT INTO World
+VALUES('Afghanistan','Asia',652230,25500100,20343000);
+INSERT INTO World
+VALUES('Albania','Europe',28748,2831741,12960000);
+INSERT INTO World
+VALUES('Algeria','Africa',2381741,37100000,188681000);
+INSERT INTO World
+VALUES('Andorra','Europe',468,78115,3712000);
+INSERT INTO World
+VALUES('Angola','Africa',1246700,20609294,100990000);
+
+
+select name,population, area from World where World.area > 3000000 or (population > 25000000 and gdp > 20000000);
+
