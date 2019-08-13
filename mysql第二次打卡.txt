@@ -1,0 +1,132 @@
+#项目三：
+use practice;
+CREATE TABLE courses(
+      student VARCHAR(64) NOT NULL;
+      class VARCHAR(20)
+);
+
+INSERT INTO courses VALUES('A' , 'Math');
+INSERT INTO courses VALUES('B' , 'English');
+INSERT INTO courses VALUES('C', 'math');
+INSERT INTO courses VALUES('D','Biology');
+INSERT INTO courses VALUES('E','Math');
+INSERT INTO courses VALUES('F','Computer');
+INSERT INTO courses VALUES('G','Math');
+INSERT INTO courses VALUES('H','Math');
+INSERT INTO courses VALUES('I','Math');
+INSERT INTO courses VALUES('A','Math');
+
+SELECT class
+FROM courses
+group by class
+having count(distinct student) >= 5;
+
+
+#项目四
+CREATE TABLE salary（
+      id INT NOT NULL PRIMARY KEY,
+      name VARCHAR(20) NOT NULL,
+      sex CHAR NOT NULL,
+      salary int
+);
+
+INSERT INTO salary VALUES(1,'A','m',2500);
+INSERT INTO salary VALUES(2,'B','f',1500);
+INSERT INTO salary VALUES(3,'C','m',5500);
+INSERT INTO salary VALUES(4,'D','f',500);
+
+
+UPDATE salary
+SET sex = CASE
+      WHEN sex = 'f' THEN 'm'
+      WHEN sex = 'm' THEN 'f'
+      ELSE sex
+END;
+
+#项目五
+CREATE TABLE cinema(
+      id INT NOT NULL PRIMARY KEY,
+      movie VARCHAR(20) NOT NULL,
+      desciption VARCHAR(20) NOT NULL,
+      rating float
+);
+
+INSERT INTO cinema VALUES('1','War', 'great3D', '8.9');
+INSERT INTO cinema VALUES ('2', 'Science', 'fiction', '8.5');
+INSERT INTO cinema VALUES ('3', 'irish', 'boring', '6.2');
+INSERT INTO cinema VALUES ('4', 'Ice song', ' Fantacy', '8.6');
+INSERT INTO cinema VALUES ('5', 'House card', 'Interesting', '9.1');
+
+SELECT id, movie, description, rating
+FROM cinema
+WHERE description != 'boring'
+AND id % 2 = 1
+ORDER BY rating DESC;
+
+
+#项目六
+CREATE TABLE person(
+PersonID int PRIMARY KEY,
+FirstName varchar(20),
+LastName varchar(20)
+);
+INSERT INTO person VALUES(1,'Li','xiaoyao');
+INSERT INTO person VALUES(2,'Zhao','linger');
+INSERT INTO person VALUES(3,'Lin','yueru');
+
+CREATE TABLE Address(
+AddressId int PRIMARY KEY,
+PersonId int ,
+City varchar(20),
+State varchar(20)
+);
+
+INSERT INTO address VALUES(1,2,'Hangzhou','Zhejiang');
+INSERT INTO address VALUES(2,1,'Hangzhou','Zhejiang');
+INSERT INTO address VALUES(3,3,'Changsha','Hunan');
+INSERT INTO address VALUES(4,4,'Haidian','Beijing');
+
+SELECT Person.FirstName, Person.SecondName, Address.City, Address.State
+from Person left join Address 
+on Person.PersonID = Address.PersonID;
+
+#项目七
+DELETE P1 FROM Person P1 JOIN Person P2
+ON P1.Email = P2.Email WHERE P1.Id > P2.Id
+
+#项目八
+
+SELECT Name AS Customers FROM Customers WHERE Id not IN(SELECT CustomerId From Orders);
+
+#项目九
+SELECT e.Name AS Employee 
+FROM Employee e1 
+JOIN Employee e2 
+ON e1.ManagerId = e2.Id
+AND e1.salary > e2.salary;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
