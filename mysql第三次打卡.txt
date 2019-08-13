@@ -1,0 +1,66 @@
+#项目十
+
+SELECT Department.Name AS Department, Employee.Name AS Employee, Employee.Salary AS Salary
+FROM Department
+JOIN employee
+WHERE Department.Id = employ.DepartmentId
+GROUP BY Department.name
+HAVING MAX(Salary);
+
+#项目十一
+select id+1 as id ,student from seat where id % 2 =1 and id <> (select max(id) from seat)
+union
+select id-1 as id, student from seat where id % 2 = 0
+union
+select id ,student from seat where id = (select max(id) from seat)
+order by id;
+
+#项目十二
+
+select scores.Score, count(ranking.Score) ranks
+from scores, (select distinct Score from scores) ranking
+where ranking,score >= scores.Score
+group by scores.Id
+order by ranks
+
+
+#项目十三
+SELECT DISTINCT l1.Num AS ConsecutiveNums
+From Logs l1
+JOIN Logs l2 ON l1.id = l2.id-1
+JOIN Logs l3 ON l2.id = l3.id-1
+Where l1.Num = l2.Num AND l2.Num = l3.Num
+
+#项目十四
+select id, 'root' as Type
+from tree
+where p_id is null
+union
+select id ,'leaf' as Type
+from tree
+where
+       id is not null and
+       id not in (select p_id from tree where p_id is not null)
+union
+select id, 'inner' as Type
+from tree
+where
+       p_id is not null and
+       id in (select p_id from tree where p_id is not null)
+order by id
+
+#项目十五
+SELECT Name
+FROM(
+SELECT ManagerId, COUNT(Id) AS cnt
+FROM employee
+GROUP BY ManagerId)m, employee e
+WHERE m.ManagerId = e.Id
+AND cnt >= 5;
+
+
+
+
+
+
+
